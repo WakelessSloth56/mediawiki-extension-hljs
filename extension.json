@@ -7,7 +7,7 @@
     "description": "Allows to use the client-side syntax highlighter [https://highlightjs.org highlight.js] in MediaWiki",
     "type": "parserhook",
     "require": {
-        "MediaWiki": ">= 1.28"
+        "MediaWiki": ">= 1.25"
     },
     "AutoloadClasses": {
         "HLJSHooks": "HLJSHooks.php"
