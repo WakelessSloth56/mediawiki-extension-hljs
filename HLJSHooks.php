@@ -4,7 +4,7 @@ class HLJSHooks
 {
     public static function onParserFirstCallInit(Parser $parser)
     {
-        $parser->setHook('syntaxhighlight', __CLASS__.'::render');
+        $parser->setHook('hljs', __CLASS__.'::render');
     }
 
     public static function render($input, array $args, Parser $parser, PPFrame $frame)
