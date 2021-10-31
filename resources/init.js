@@ -11,8 +11,8 @@ mw.hook('wikipage.categories').add(() => {
             document.head.appendChild(script);
         };
 
-        const HLJS_SCRIPT = 'https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.3.1/highlight.min.js';
-        const HLJS_STYLE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/vs2015.min.css';
+        const HLJS_SCRIPT = mw.config.get('wgHljsScriptURL');
+        const HLJS_STYLE = mw.config.get('wgHljsStyleURL');
 
         loadScript(HLJS_SCRIPT, () => {
             $('head').append(`<link rel="stylesheet" href="${HLJS_STYLE}">`);

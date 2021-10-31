@@ -4,6 +4,11 @@ class HLJSHooks
 {
     public static function onParserFirstCallInit(Parser $parser)
     {
+        global $wgOut,$wgHljsScriptURL,$wgHljsStyleURL;
+
+        $wgOut->addJsConfigVars('wgHljsScriptURL', $wgHljsScriptURL);
+        $wgOut->addJsConfigVars('wgHljsStyleURL', $wgHljsStyleURL);
+
         $parser->setHook('hljs', __CLASS__.'::render');
     }
 
