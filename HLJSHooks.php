@@ -13,14 +13,20 @@ class HLJSHooks
 
         $code = htmlspecialchars(trim($input));
 
-        $inline = isset($param['inline']);
+        $lang = isset($args['lang']) ? ' language-'.$args['lang'] : '';
+        $inline = isset($args['inline']);
+        $class = isset($args['class']) ? ' '.$args['class'] : '';
 
-        $htmlAttribs = [
-            'class' => 'hljs'
-        ];
+        $htmlAttribs = [];
+
+        $htmlAttribs['class'] = 'hljs'.$lang.$class;
+
+        if (isset($args['style'])) {
+            $htmlAttribs['style'] = $args['style'];
+        }
 
         if ($inline) {
-            $htmlAttribs['style'] = 'display: inline;';
+            $htmlAttribs['style'] .= 'display: inline;';
             $output = Html::rawElement('code', $htmlAttribs, $code);
         } else {
             $output = Html::rawElement('pre', $htmlAttribs, $code);
