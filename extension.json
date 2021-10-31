@@ -1,0 +1,28 @@
+{
+    "name": "HLJS Integration",
+    "version": "1.0",
+    "author": "[https://github.com/WakelessSloth56 WakelessSloth56]",
+    "url": "https://github.com/WakelessSloth56/mediawiki-extension-hljs",
+    "license-name": "AGPL-3.0",
+    "description": "Allows to use the client-side syntax highlighter [https://highlightjs.org highlight.js] in MediaWiki",
+    "type": "parserhook",
+    "require": {
+        "MediaWiki": ">= 1.28"
+    },
+    "AutoloadClasses": {
+        "HLJSHooks": "HLJSHooks.php"
+    },
+    "Hooks": {
+        "ParserFirstCallInit": ["HLJSHooks::onParserFirstCallInit"]
+    },
+    "ResourceModules": {
+        "ext.HLJS": {
+            "scripts": ["resources/init.js"]
+        }
+    },
+    "ResourceFileModulePaths": {
+        "localBasePath": "",
+        "remoteExtPath": "HLJS/resources"
+    },
+    "manifest_version": 2
+}
