@@ -20,6 +20,31 @@ mw.hook('wikipage.categories').add(() => {
                 const e = $(v);
                 const h = $('<div>').addClass('hljsw-header').hide();
                 e.before(h);
+                if (e.hasClass('copyable')) {
+                    h.show();
+                    const id = Math.random().toString(36).slice(-6);
+                    e.after(
+                        $('<pre>')
+                            .attr('id', 'hljsw-copysource-' + id)
+                            .html(e.html())
+                            .hide()
+                    );
+                    h.append(
+                        $('<div>')
+                            .attr('data-copysource', id)
+                            .addClass('hljsw-copybutton')
+                            .html(' 复制')
+                            .prepend('<i class="far fa-copy"></i>')
+                            .on('click', function () {
+                                navigator.clipboard.writeText(
+                                    $(
+                                        '#hljsw-copysource-' +
+                                            $(this).attr('data-copysource')
+                                    ).text()
+                                );
+                            })
+                    );
+                }
                 if (e.attr('data-title')) {
                     h.show();
                     h.prepend(
