@@ -38,18 +38,9 @@ HLJS Integration 扩展使用 [highlight.js](https://highlightjs.org/) 库来进
 
 注：为了防止与 MediaWiki 中默认的 [SyntaxHighlight](https://www.mediawiki.org/wiki/Extension:SyntaxHighlight) 发生冲突，自 [6f22929](https://github.com/WakelessSloth56/mediawiki-extension-hljs/commit/6f22929c16cff3ca76bbbc084e59e97b4055d224) 起改用 `hljs` 标签。
 
-### 属性
+### 更多
 
-* `lang`
-  * 不指定 `lang` 属性时，默认由 HLJS 自动决定语言，参见[此处](https://highlightjs.org/usage/)。
-* `inline`
-  * 该属性表示代码块应该作为段落的一部分内联显示。
-* `id`
-  * 指定代码块元素的 ID。
-* `class`
-  * 为代码块元素添加类。
-* `style`
-  * 为代码块元素添加内联样式。
+高级使用和示例参见 AHWiki 中的帮助页面（<https://wiki.auioc.com/view/Help:HLJS_Integration>）。
 
 ## 配置
 
