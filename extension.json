@@ -29,7 +29,7 @@
             "value": "https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"
         },
         "HljsStyleURL": {
-            "value": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/vs.min.css"
+            "value": "https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/styles/stackoverflow-light.min.css"
         }
     },
     "manifest_version": 2
