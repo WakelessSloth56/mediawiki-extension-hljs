@@ -17,7 +17,7 @@ mw.hook('wikipage.categories').add(() => {
         loadScript(HLJS_SCRIPT, () => {
             $('head').append(`<link rel="stylesheet" href="${HLJS_STYLE}">`);
             $('pre.hljs,code.hljs,pre.mw-code').each(function (index, element) {
-                hljs.highlightBlock(element);
+                hljs.highlightElement(element);
             });
         });
     })();
