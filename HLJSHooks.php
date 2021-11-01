@@ -42,7 +42,7 @@ class HLJSHooks
             }
             $output = Html::rawElement(
                 'div',
-                ['class' => 'hljs-wrapper'],
+                ['class' => 'hljsw-wrapper'],
                 Html::rawElement('pre', $htmlAttribs, $code)
             );
         }
