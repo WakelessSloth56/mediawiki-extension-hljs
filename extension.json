@@ -17,7 +17,8 @@
     },
     "ResourceModules": {
         "ext.HLJS": {
-            "scripts": ["resources/init.js"]
+            "scripts": ["resources/init.js"],
+            "styles": ["resources/style.css"]
         }
     },
     "ResourceFileModulePaths": {

@@ -37,6 +37,9 @@ class HLJSHooks
             if (isset($args['copyable'])) {
                 $htmlAttribs['class'] .= ' copyable';
             }
+            if (isset($args['title'])) {
+                $htmlAttribs['data-title'] = $args['title'];
+            }
             $output = Html::rawElement(
                 'div',
                 ['class' => 'hljs-wrapper'],
