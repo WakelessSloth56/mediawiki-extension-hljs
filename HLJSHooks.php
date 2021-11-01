@@ -34,7 +34,14 @@ class HLJSHooks
             $htmlAttribs['style'] .= 'display: inline;';
             $output = Html::rawElement('code', $htmlAttribs, $code);
         } else {
-            $output = Html::rawElement('pre', $htmlAttribs, $code);
+            if (isset($args['copyable'])) {
+                $htmlAttribs['class'] .= ' copyable';
+            }
+            $output = Html::rawElement(
+                'div',
+                ['class' => 'hljs-wrapper'],
+                Html::rawElement('pre', $htmlAttribs, $code)
+            );
         }
 
         return $output;
