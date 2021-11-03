@@ -1,9 +1,6 @@
 .hljsw-wrapper {
     margin-top: 1em;
 }
-.hljsw-wrapper pre.hljs {
-    margin-top: 0;
-}
 .hljsw-header {
     display: flex;
     justify-content: space-between;
@@ -24,4 +21,20 @@
 }
 .hljsw-copybutton:hover {
     background-color: #f2f2f2;
+}
+.hljsw-content {
+    display: flex;
+    flex-direction: row;
+}
+.hljsw-content pre {
+    margin-top: 0;
+}
+.hljsw-content pre.hljs {
+    flex-grow: 1;
+}
+.hljsw-content pre.hljsw-linenumber {
+    padding: 1em 0.4em 1em 1em;
+    text-align: right;
+    color: #656e77;
+    background: #eeeeee;
 }

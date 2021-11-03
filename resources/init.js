@@ -59,6 +59,17 @@ mw.hook('wikipage.categories').add(() => {
                     pre.removeAttr('data-title');
                 }
                 hljs.highlightElement(pre.get(0));
+                if (pre.hasClass('line')) {
+                    const line = $('<pre>').addClass('hljsw-linenumber');
+                    for (
+                        let i = 0, l = pre.text().split('\n').length;
+                        i < l;
+                        i++
+                    ) {
+                        line.append($('<div>').text(i + 1));
+                    }
+                    content.prepend(line);
+                }
             });
         };
         const highlightCode = async () => {
