@@ -24,7 +24,7 @@ mw.hook('wikipage.categories').add(() => {
                 wrapper.append(header);
                 wrapper.append(content);
                 pre.appendTo(content);
-                if (pre.hasClass('copyable')) {
+                if (pre.hasClass('copy')) {
                     header.show();
                     const id = Math.random().toString(36).slice(-6);
                     pre.after(

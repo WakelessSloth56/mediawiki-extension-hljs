@@ -34,8 +34,8 @@ class HLJSHooks
             $htmlAttribs['style'] .= 'display: inline;';
             $output = Html::rawElement('code', $htmlAttribs, $code);
         } else {
-            if (isset($args['copyable'])) {
-                $htmlAttribs['class'] .= ' copyable';
+            if (isset($args['copy'])) {
+                $htmlAttribs['class'] .= ' copy';
             }
             if (isset($args['title'])) {
                 $htmlAttribs['data-title'] = $args['title'];
