@@ -14,12 +14,14 @@ mw.hook('wikipage.categories').add(() => {
         const HLJS_SCRIPT = mw.config.get('wgHljsScriptURL');
         const HLJS_STYLE = mw.config.get('wgHljsStyleURL');
 
-        $('head').append(`<link rel="stylesheet" href="${HLJS_STYLE}">`);
-        loadScript(HLJS_SCRIPT, () => {
-            $('pre.hljs,code.hljs,pre.mw-code').each(function (i, v) {
+        const highlightPre = async () => {
+            $('pre.hljs').each(function (i, v) {
                 const e = $(v);
+                const w = $('<div>').addClass('hljsw-wrapper');
                 const h = $('<div>').addClass('hljsw-header').hide();
-                e.before(h);
+                w.append(h);
+                e.before(w);
+                e.appendTo(w);
                 if (e.hasClass('copyable')) {
                     h.show();
                     const id = Math.random().toString(36).slice(-6);
@@ -56,6 +58,14 @@ mw.hook('wikipage.categories').add(() => {
                 }
                 hljs.highlightElement(e.get(0));
             });
+        };
+        const highlightCode = async () => {
+            $('code.hljs').each((i, e) => hljs.highlightElement(e));
+        };
+
+        $('head').append(`<link rel="stylesheet" href="${HLJS_STYLE}">`);
+        loadScript(HLJS_SCRIPT, () => {
+            Promise.all([highlightPre(), highlightCode()]);
         });
     })();
 });
