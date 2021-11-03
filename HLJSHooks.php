@@ -37,11 +37,14 @@ class HLJSHooks
             if (isset($args['copy'])) {
                 $htmlAttribs['class'] .= ' copy';
             }
+            if (isset($args['title'])) {
+                $htmlAttribs['data-title'] = $args['title'];
+            }
             if (isset($args['line'])) {
                 $htmlAttribs['class'] .= ' line';
             }
-            if (isset($args['title'])) {
-                $htmlAttribs['data-title'] = $args['title'];
+            if (isset($args['linestart'])) {
+                $htmlAttribs['data-linestart'] = $args['linestart'];
             }
             $output = Html::rawElement('pre', $htmlAttribs, $code);
         }

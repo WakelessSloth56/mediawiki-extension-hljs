@@ -61,17 +61,29 @@ mw.hook('wikipage.categories').add(() => {
                 hljs.highlightElement(pre.get(0));
                 if (pre.hasClass('line')) {
                     const line = $('<pre>').addClass('hljsw-linenumber');
+                    content.prepend(line);
+                    const rawLineStart = parseInt(pre.attr('data-linestart'));
+                    const lineStart =
+                        !isNaN(rawLineStart) && rawLineStart > 0
+                            ? rawLineStart
+                            : 1;
                     for (
-                        let i = 0, l = pre.text().split('\n').length;
+                        let i = lineStart,
+                            l = pre.text().split('\n').length + lineStart;
                         i < l;
                         i++
                     ) {
-                        line.append($('<div>').text(i + 1));
+                        line.append(
+                            $('<div>')
+                                .addClass('line-' + i)
+                                .text(i)
+                        );
                     }
-                    content.prepend(line);
+                    pre.removeAttr('data-linestart');
                 }
             });
         };
+
         const highlightCode = async () => {
             $('code.hljs').each((i, e) => hljs.highlightElement(e));
         };
