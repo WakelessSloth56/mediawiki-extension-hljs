@@ -40,11 +40,7 @@ class HLJSHooks
             if (isset($args['title'])) {
                 $htmlAttribs['data-title'] = $args['title'];
             }
-            $output = Html::rawElement(
-                'div',
-                ['class' => 'hljsw-wrapper'],
-                Html::rawElement('pre', $htmlAttribs, $code)
-            );
+            $output = Html::rawElement('pre', $htmlAttribs, $code);
         }
 
         return $output;
