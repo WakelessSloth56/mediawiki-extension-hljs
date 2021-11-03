@@ -16,22 +16,22 @@ mw.hook('wikipage.categories').add(() => {
 
         const highlightPre = async () => {
             $('pre.hljs').each(function (i, v) {
-                const e = $(v);
-                const w = $('<div>').addClass('hljsw-wrapper');
-                const h = $('<div>').addClass('hljsw-header').hide();
-                w.append(h);
-                e.before(w);
-                e.appendTo(w);
-                if (e.hasClass('copyable')) {
-                    h.show();
+                const pre = $(v);
+                const wrapper = $('<div>').addClass('hljsw-wrapper');
+                const header = $('<div>').addClass('hljsw-header').hide();
+                wrapper.append(header);
+                pre.before(wrapper);
+                pre.appendTo(wrapper);
+                if (pre.hasClass('copyable')) {
+                    header.show();
                     const id = Math.random().toString(36).slice(-6);
-                    e.after(
+                    pre.after(
                         $('<pre>')
                             .attr('id', 'hljsw-copysource-' + id)
-                            .html(e.html())
+                            .html(pre.html())
                             .hide()
                     );
-                    h.append(
+                    header.append(
                         $('<div>')
                             .attr('data-copysource', id)
                             .addClass('hljsw-copybutton')
@@ -47,16 +47,16 @@ mw.hook('wikipage.categories').add(() => {
                             })
                     );
                 }
-                if (e.attr('data-title')) {
-                    h.show();
-                    h.prepend(
+                if (pre.attr('data-title')) {
+                    header.show();
+                    header.prepend(
                         $('<div>')
                             .addClass('hljsw-title')
-                            .html(e.attr('data-title'))
+                            .html(pre.attr('data-title'))
                     );
-                    e.removeAttr('data-title');
+                    pre.removeAttr('data-title');
                 }
-                hljs.highlightElement(e.get(0));
+                hljs.highlightElement(pre.get(0));
             });
         };
         const highlightCode = async () => {
