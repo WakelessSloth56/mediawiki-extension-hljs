@@ -19,9 +19,11 @@ mw.hook('wikipage.categories').add(() => {
                 const pre = $(v);
                 const wrapper = $('<div>').addClass('hljsw-wrapper');
                 const header = $('<div>').addClass('hljsw-header').hide();
-                wrapper.append(header);
+                const content = $('<div>').addClass('hljsw-content');
                 pre.before(wrapper);
-                pre.appendTo(wrapper);
+                wrapper.append(header);
+                wrapper.append(content);
+                pre.appendTo(content);
                 if (pre.hasClass('copyable')) {
                     header.show();
                     const id = Math.random().toString(36).slice(-6);

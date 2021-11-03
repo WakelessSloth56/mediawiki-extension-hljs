@@ -1,7 +1,7 @@
 .hljsw-wrapper {
     margin-top: 1em;
 }
-.hljsw-wrapper > pre.hljs {
+.hljsw-wrapper pre.hljs {
     margin-top: 0;
 }
 .hljsw-header {
