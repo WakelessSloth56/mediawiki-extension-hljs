@@ -15,6 +15,16 @@ MediaWiki 代码语法高亮扩展。
 
 HLJS Integration 扩展使用 [highlight.js](https://highlightjs.org/) 库来进行代码语法高亮。
 
+### 功能
+
+相较于原 Highlightjs Integration 扩展：
+
+* 支持使用在公共 CDN 托管的 HLJS 脚本和样式表。
+* 支持为代码块启用复制按钮。
+* 支持为代码块添加标题。
+* 支持为代码块启用行号显示。
+* 支持代码块行号显示的起始行号。
+
 ## 安装
 
 1. 下载文件并放置在 `extensions/` 目录下名为 `HLJS` 的文件夹中。
@@ -60,7 +70,7 @@ $wgHljsStyleURL = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/sty
 
 * Highlightjs Integration ([GitHub](https://github.com/Nicolas01/Highlightjs_Integration/) / [MediaWiki](https://www.mediawiki.org/wiki/Extension:Highlightjs_Integration))
   * 这是此扩展最初开发的思路来源。
-  * 在此基础上，我们加入了可以使用在公共 CDN 托管的 HLJS 脚本和样式表的功能，这可以在某些情况下减轻网站主站的带宽/流量消耗。
+  * 在此基础上，我们添加了更多的功能。
 * [AHWiki](https://wiki.auioc.com) (AUIOC)
   * 此扩展已在 AHWiki 中安装并使用。
 
