@@ -18,10 +18,17 @@
     margin-left: auto;
     padding: 2px 10px;
     cursor: pointer;
+    user-select: none;
     border-left: 0.1em solid #c8ccd1;
+}
+.hljsw-copybutton.clicked {
+    cursor: default;
 }
 .hljsw-copybutton:hover {
     background-color: #f2f2f2;
+}
+.hljsw-copied-icon {
+    color: #3c763d;
 }
 .hljsw-content {
     display: flex;

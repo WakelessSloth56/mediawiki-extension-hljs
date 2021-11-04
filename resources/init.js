@@ -35,15 +35,30 @@ mw.hook('wikipage.categories').add(() => {
                         $('<div>')
                             .attr('data-copysource', id)
                             .addClass('hljsw-copybutton')
-                            .html(' 复制')
-                            .prepend('<i class="far fa-copy"></i>')
+                            .append('<i class="far fa-copy fa-fw"></i>')
+                            .append(
+                                '<i class="fas fa-check fa-fw hljsw-copied-icon" style="display:none"></i>'
+                            )
+                            .append(' 复制')
                             .on('click', function () {
+                                const e = $(this);
+                                if (e.hasClass('clicked')) return;
+                                e.addClass('clicked');
                                 navigator.clipboard.writeText(
                                     $(
                                         '#hljsw-copysource-' +
-                                            $(this).attr('data-copysource')
+                                            e.attr('data-copysource')
                                     ).text()
                                 );
+                                e.children('i:nth-child(1)').toggle();
+                                e.children('i:nth-child(2)').toggle();
+                                setTimeout(() => {
+                                    e.children('i:nth-child(1)').fadeToggle(
+                                        'slow'
+                                    );
+                                    e.children('i:nth-child(2)').toggle();
+                                    e.removeClass('clicked');
+                                }, 2000);
                             })
                     );
                 }
