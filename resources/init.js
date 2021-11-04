@@ -36,26 +36,19 @@ mw.hook('wikipage.categories').add(() => {
                             .attr('data-copysource', id)
                             .addClass('hljsw-copybutton')
                             .append('<i class="far fa-copy fa-fw"></i>')
-                            .append(
-                                '<i class="fas fa-check fa-fw hljsw-copied-icon" style="display:none"></i>'
-                            )
+                            .append('<i class="fas fa-check fa-fw hljsw-copied-icon" style="display:none"></i>')
                             .append(' 复制')
                             .on('click', function () {
                                 const e = $(this);
                                 if (e.hasClass('clicked')) return;
                                 e.addClass('clicked');
                                 navigator.clipboard.writeText(
-                                    $(
-                                        '#hljsw-copysource-' +
-                                            e.attr('data-copysource')
-                                    ).text()
+                                    $('#hljsw-copysource-' + e.attr('data-copysource')).text()
                                 );
                                 e.children('i:nth-child(1)').toggle();
                                 e.children('i:nth-child(2)').toggle();
                                 setTimeout(() => {
-                                    e.children('i:nth-child(1)').fadeToggle(
-                                        'slow'
-                                    );
+                                    e.children('i:nth-child(1)').fadeToggle('slow');
                                     e.children('i:nth-child(2)').toggle();
                                     e.removeClass('clicked');
                                 }, 2000);
@@ -64,11 +57,7 @@ mw.hook('wikipage.categories').add(() => {
                 }
                 if (pre.attr('data-title')) {
                     header.show();
-                    header.prepend(
-                        $('<div>')
-                            .addClass('hljsw-title')
-                            .html(pre.attr('data-title'))
-                    );
+                    header.prepend($('<div>').addClass('hljsw-title').html(pre.attr('data-title')));
                     pre.removeAttr('data-title');
                 }
                 hljs.highlightElement(pre.get(0));
@@ -76,16 +65,8 @@ mw.hook('wikipage.categories').add(() => {
                     const line = $('<pre>').addClass('hljsw-linenumber');
                     content.prepend(line);
                     const rawLineStart = parseInt(pre.attr('data-linestart'));
-                    const lineStart =
-                        !isNaN(rawLineStart) && rawLineStart > 0
-                            ? rawLineStart
-                            : 1;
-                    for (
-                        let i = lineStart,
-                            l = pre.text().split('\n').length + lineStart;
-                        i < l;
-                        i++
-                    ) {
+                    const lineStart = !isNaN(rawLineStart) && rawLineStart > 0 ? rawLineStart : 1;
+                    for (let i = lineStart, l = pre.text().split('\n').length + lineStart; i < l; i++) {
                         line.append(
                             $('<div>')
                                 .addClass('line-' + i)
