@@ -2,16 +2,6 @@ mw.hook('wikipage.categories').add(() => {
     (async () => {
         'use strict';
 
-        const loadScript = (url, callback) => {
-            var script = document.createElement('script');
-            script.onload = () => callback();
-            script.src = url;
-            document.head.appendChild(script);
-        };
-
-        const HLJS_SCRIPT = mw.config.get('wgHljsScriptURL');
-        const HLJS_STYLE = mw.config.get('wgHljsStyleURL');
-
         const highlightPre = async () => {
             $('pre.hljs').each(function (i, v) {
                 const pre = $(v);
@@ -82,9 +72,6 @@ mw.hook('wikipage.categories').add(() => {
             $('code.hljs').each((i, e) => hljs.highlightElement(e));
         };
 
-        $('head').append(`<link rel="stylesheet" href="${HLJS_STYLE}">`);
-        loadScript(HLJS_SCRIPT, () => {
-            Promise.all([highlightPre(), highlightCode()]);
-        });
+        Promise.all([highlightPre(), highlightCode()]);
     })();
 });

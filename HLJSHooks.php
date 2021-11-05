@@ -2,13 +2,20 @@
 
 class HLJSHooks
 {
+    public static function onBeforePageDisplay(OutputPage $out, Skin $skin)
+    {
+        if (in_array('ext.HLJS', $out->getModules())) {
+            global $wgHljsScriptURL,$wgHljsStyleURL;
+            $js = '<script src="'.$wgHljsScriptURL.'"></script>';
+            $css = '<link rel="stylesheet" href="'.$wgHljsStyleURL.'" />';
+            $out->addHeadItem('HLJS', $js.$css);
+        }
+
+        return true;
+    }
+
     public static function onParserFirstCallInit(Parser $parser)
     {
-        global $wgOut,$wgHljsScriptURL,$wgHljsStyleURL;
-
-        $wgOut->addJsConfigVars('wgHljsScriptURL', $wgHljsScriptURL);
-        $wgOut->addJsConfigVars('wgHljsStyleURL', $wgHljsStyleURL);
-
         $parser->setHook('hljs', __CLASS__.'::render');
     }
 

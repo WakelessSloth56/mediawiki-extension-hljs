@@ -13,7 +13,8 @@
         "HLJSHooks": "HLJSHooks.php"
     },
     "Hooks": {
-        "ParserFirstCallInit": ["HLJSHooks::onParserFirstCallInit"]
+        "ParserFirstCallInit": ["HLJSHooks::onParserFirstCallInit"],
+        "BeforePageDisplay": ["HLJSHooks::onBeforePageDisplay"]
     },
     "ResourceModules": {
         "ext.HLJS": {
