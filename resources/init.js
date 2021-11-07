@@ -23,9 +23,11 @@
                     $('<div>')
                         .attr('data-copysource', id)
                         .addClass('hljsw-copybutton')
-                        .append('<i class="far fa-copy fa-fw"></i>')
-                        .append('<i class="fas fa-check fa-fw hljsw-copied-icon" style="display:none"></i>')
-                        .append(mw.message('hljs-copy').text())
+                        .append(
+                            '<i class="far fa-copy fa-fw"></i> ' +
+                                '<i class="fas fa-check fa-fw hljsw-copied-icon" style="display:none"></i> ' +
+                                mw.message('hljs-copy').text()
+                        )
                         .on('click', function () {
                             const e = $(this);
                             if (e.hasClass('clicked')) return;
@@ -34,7 +36,7 @@
                             e.children('i:nth-child(1)').toggle();
                             e.children('i:nth-child(2)').toggle();
                             setTimeout(() => {
-                                e.children('i:nth-child(1)').fadeToggle('slow');
+                                e.children('i:nth-child(1)').fadeToggle();
                                 e.children('i:nth-child(2)').toggle();
                                 e.removeClass('clicked');
                             }, 2000);
