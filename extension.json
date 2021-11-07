@@ -16,15 +16,19 @@
         "ParserFirstCallInit": ["HLJSHooks::onParserFirstCallInit"],
         "BeforePageDisplay": ["HLJSHooks::onBeforePageDisplay"]
     },
-    "ResourceModules": {
-        "ext.HLJS": {
-            "scripts": ["resources/init.js"],
-            "styles": ["resources/style.css"]
-        }
-    },
     "ResourceFileModulePaths": {
         "localBasePath": "",
         "remoteExtPath": "HLJS/resources"
+    },
+    "ResourceModules": {
+        "ext.HLJS": {
+            "scripts": ["resources/init.js"],
+            "styles": ["resources/style.css"],
+            "messages": ["hljs-copy"]
+        }
+    },
+    "MessagesDirs": {
+        "HLJS": ["i18n"]
     },
     "config": {
         "HljsScriptURL": {

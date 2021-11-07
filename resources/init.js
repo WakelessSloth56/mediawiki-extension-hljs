@@ -25,7 +25,7 @@
                         .addClass('hljsw-copybutton')
                         .append('<i class="far fa-copy fa-fw"></i>')
                         .append('<i class="fas fa-check fa-fw hljsw-copied-icon" style="display:none"></i>')
-                        .append(' 复制')
+                        .append(mw.message('hljs-copy').text())
                         .on('click', function () {
                             const e = $(this);
                             if (e.hasClass('clicked')) return;
