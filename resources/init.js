@@ -6,7 +6,7 @@
         }
         $('pre.hljs').each(function (i, v) {
             const pre = $(v);
-            pre.html(pre.html().trim());
+            pre.html(pre.html().trimEnd());
             const wrapper = $('<div>').addClass('hljsw-wrapper');
             const header = $('<div>').addClass('hljsw-header').hide();
             const content = $('<div>').addClass('hljsw-content');

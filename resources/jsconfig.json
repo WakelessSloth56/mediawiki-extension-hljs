@@ -1,4 +1,7 @@
 {
+    "compilerOptions": {
+        "target": "ESNext"
+    },
     "typeAcquisition": {
         "include": ["jquery"]
     }
