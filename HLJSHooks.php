@@ -16,6 +16,11 @@ class HLJSHooks
 
     public static function onParserFirstCallInit(Parser $parser)
     {
+        global $wgHljsSyntaxhighlightTag;
+        if ($wgHljsSyntaxhighlightTag) {
+            $parser->setHook('syntaxhighlight', __CLASS__.'::render');
+            $parser->setHook('source', __CLASS__.'::render');
+        }
         $parser->setHook('hljs', __CLASS__.'::render');
     }
 
