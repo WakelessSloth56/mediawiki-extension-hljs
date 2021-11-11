@@ -43,7 +43,7 @@ class HLJSHooks
         }
 
         if ($inline) {
-            $htmlAttribs['style'] .= 'display: inline;';
+            $htmlAttribs['class'] .= ' inline';
             $output = Html::rawElement('code', $htmlAttribs, $code);
         } else {
             if (isset($args['copy'])) {

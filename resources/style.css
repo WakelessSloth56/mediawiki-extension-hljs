@@ -49,3 +49,6 @@
     background: #eeeeee;
     user-select: none;
 }
+code.hljs.inline {
+    display: inline;
+}
