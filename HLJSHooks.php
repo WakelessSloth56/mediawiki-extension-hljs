@@ -66,7 +66,9 @@ class HLJSHooks
             if (isset($args['linestart'])) {
                 $htmlAttribs['data-linestart'] = $args['linestart'];
             }
-            $output = Html::rawElement('pre', $htmlAttribs, $code);
+            $marker = $parser::MARKER_PREFIX . '-hljsinner-'. sprintf('%08X', $parser->mMarkerIndex++) . $parser::MARKER_SUFFIX;
+            $parser->getStripState()->addNoWiki($marker, $code);
+            $output = Html::rawElement('pre', $htmlAttribs, $marker);
         }
 
         return $output;
