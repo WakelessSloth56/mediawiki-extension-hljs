@@ -36,7 +36,7 @@ class HLJSHooks
     {
         $parser->getOutput()->addModules('ext.HLJS');
 
-        $code = htmlspecialchars(trim($input));
+        $code = htmlspecialchars(trim($parser->getStripState()->unstripNoWiki($input)));
 
         $lang = isset($args['lang']) ? ' language-'.$args['lang'] : '';
         $inline = isset($args['inline']);
