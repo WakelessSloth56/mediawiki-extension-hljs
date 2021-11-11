@@ -46,21 +46,9 @@ HLJS Integration 扩展使用 [highlight.js](https://highlightjs.org/) 库来进
 </hljs>
 ```
 
-注：为了防止与 MediaWiki 中默认的 [SyntaxHighlight](https://www.mediawiki.org/wiki/Extension:SyntaxHighlight) 发生冲突，自 [6f22929](https://github.com/WakelessSloth56/mediawiki-extension-hljs/commit/6f22929c16cff3ca76bbbc084e59e97b4055d224) 起改用 `hljs` 标签。
-
 ### 更多
 
-高级使用和示例参见 AHWiki 中的帮助页面（<https://wiki.auioc.com/view/Help:HLJS_Integration>）。
-
-## 配置
-
-```php
-// LocalSettings.php
-
-// 指定 HLJS 脚本的样式表的 URL, 默认使用在 jsDelivr 中托管的最新版本。
-$wgHljsScriptURL = 'https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js';
-$wgHljsStyleURL = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/vs.min.css';
-```
+配置、高级使用和示例参见 AHWiki 中的帮助页面（<https://wiki.auioc.com/view/Help:HLJS_Integration>）。
 
 ## 维护者
 
