@@ -14,6 +14,10 @@
             wrapper.append(header);
             wrapper.append(content);
             pre.appendTo(content);
+            if (pre.attr('data-wrapper-style')) {
+                wrapper.attr('style', pre.attr('data-wrapper-style'));
+                pre.removeAttr('data-wrapper-style');
+            }
             if (pre.hasClass('copy')) {
                 header.show();
                 const id = Math.random().toString(36).slice(-6);

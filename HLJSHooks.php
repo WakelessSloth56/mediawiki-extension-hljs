@@ -39,18 +39,16 @@ class HLJSHooks
         $code = htmlspecialchars($parser->getStripState()->unstripNoWiki($input));
 
         $lang = isset($args['lang']) ? ' language-'.$args['lang'] : '';
-        $inline = isset($args['inline']);
-        $class = isset($args['class']) ? ' '.$args['class'] : '';
 
         $htmlAttribs = [];
 
-        $htmlAttribs['class'] = 'hljs'.$lang.$class;
+        $htmlAttribs['class'] = 'hljs'.$lang;
 
         if (isset($args['style'])) {
             $htmlAttribs['style'] = $args['style'];
         }
 
-        if ($inline) {
+        if (isset($args['inline'])) {
             $htmlAttribs['class'] .= ' inline';
             $output = Html::rawElement('code', $htmlAttribs, $code);
         } else {
@@ -65,6 +63,9 @@ class HLJSHooks
             }
             if (isset($args['linestart'])) {
                 $htmlAttribs['data-linestart'] = $args['linestart'];
+            }
+            if (isset($args['wrapper-style'])) {
+                $htmlAttribs['data-wrapper-style'] = $args['wrapper-style'];
             }
             $marker = $parser::MARKER_PREFIX . '-hljsinner-'. sprintf('%08X', $parser->mMarkerIndex++) . $parser::MARKER_SUFFIX;
             $parser->getStripState()->addNoWiki($marker, $code);
