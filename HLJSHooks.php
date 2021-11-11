@@ -6,9 +6,8 @@ class HLJSHooks
     {
         if (in_array('ext.HLJS', $out->getModules())) {
             global $wgHljsScriptURL,$wgHljsStyleURL;
-            $js = '<script src="'.$wgHljsScriptURL.'"></script>';
-            $css = '<link rel="stylesheet" href="'.$wgHljsStyleURL.'" />';
-            $out->addHeadItem('HLJS', $js.$css);
+            $out->addScriptFile($wgHljsScriptURL);
+            $out->addStyle($wgHljsStyleURL);
         }
 
         return true;
