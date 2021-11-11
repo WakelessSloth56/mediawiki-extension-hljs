@@ -41,6 +41,7 @@
 .hljsw-content pre.hljs {
     flex-grow: 1;
     tab-size: 4;
+    white-space: pre;
 }
 .hljsw-content pre.hljsw-linenumber {
     padding: 1em 0.4em 1em 1em;

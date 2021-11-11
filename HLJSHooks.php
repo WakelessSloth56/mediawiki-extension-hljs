@@ -23,6 +23,15 @@ class HLJSHooks
         $parser->setHook('hljs', __CLASS__.'::render');
     }
 
+    public static function onParserBeforeInternalParse(Parser $parser, &$text, $strip_state)
+    {
+        if (HLJSHooks::enableForScribunto($parser->getTitle()) && !in_array('ext.HLJS', $parser->getOutput()->getModules())) {
+            global $wgOut,$wgHljsEnableForScribunto;
+            $wgOut->addJsConfigVars('wgHljsEnableForScribunto', $wgHljsEnableForScribunto);
+            $parser->getOutput()->addModules('ext.HLJS');
+        }
+    }
+
     public static function render($input, array $args, Parser $parser, PPFrame $frame)
     {
         $parser->getOutput()->addModules('ext.HLJS');
@@ -61,5 +70,12 @@ class HLJSHooks
         }
 
         return $output;
+    }
+
+    private static function enableForScribunto($title)
+    {
+        global $wgHljsEnableForScribunto;
+
+        return $wgHljsEnableForScribunto && $title !== null && class_exists(Scribunto::class) && $title->getNamespace() === NS_MODULE;
     }
 }

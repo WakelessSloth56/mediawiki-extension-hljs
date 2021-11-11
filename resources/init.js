@@ -1,6 +1,9 @@
 (async () => {
     'use strict';
     const highlightPre = async () => {
+        if (mw.config.get('wgHljsEnableForScribunto') && mw.config.get('wgPageContentModel') === 'Scribunto') {
+            $('.mw-parser-output>pre.mw-code.mw-script:last').addClass(['hljs', 'line']);
+        }
         $('pre.hljs').each(function (i, v) {
             const pre = $(v);
             const wrapper = $('<div>').addClass('hljsw-wrapper');
