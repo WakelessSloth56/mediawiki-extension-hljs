@@ -35,13 +35,13 @@
         "ExampleExtensionMagic": "HLJS.i18n.php"
     },
     "config": {
-        "HljsScriptURL": {
+        "HljsScript": {
             "value": "https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"
         },
-        "HljsStyleURL": {
+        "HljsStyle": {
             "value": "https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/styles/stackoverflow-light.min.css"
         },
-        "HljsAdditionalLanguageScriptURL": {
+        "HljsAdditionalLanguageScript": {
             "value": "https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/languages/*.min.js"
         },
         "HljsSyntaxhighlightTag": {

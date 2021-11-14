@@ -5,9 +5,9 @@ class HLJSHooks
     public static function onBeforePageDisplay(OutputPage $out, Skin $skin)
     {
         if (in_array('ext.HLJS', $out->getModules())) {
-            global $wgHljsScriptURL,$wgHljsStyleURL;
-            $out->addScriptFile($wgHljsScriptURL);
-            $out->addStyle($wgHljsStyleURL);
+            global $wgHljsScript,$wgHljsStyle;
+            $out->addScriptFile($wgHljsScript);
+            $out->addStyle($wgHljsStyle);
         }
 
         return true;
@@ -78,8 +78,8 @@ class HLJSHooks
 
     public static function addAdditionalLanguage(Parser $parser, $lang = '')
     {
-        global $wgHljsAdditionalLanguageScriptURL;
-        $parser->getOutput()->addHeadItem('<script defer src="'.str_replace('*', $lang, $wgHljsAdditionalLanguageScriptURL).'"></script>');
+        global $wgHljsAdditionalLanguageScript;
+        $parser->getOutput()->addHeadItem('<script defer src="'.str_replace('*', $lang, $wgHljsAdditionalLanguageScript).'"></script>');
 
         return '';
     }
