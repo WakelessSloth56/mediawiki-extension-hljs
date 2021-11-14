@@ -41,6 +41,9 @@
         "HljsStyleURL": {
             "value": "https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/styles/stackoverflow-light.min.css"
         },
+        "HljsAdditionalLanguageScriptURL": {
+            "value": "https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/languages/*.min.js"
+        },
         "HljsSyntaxhighlightTag": {
             "value": false
         },

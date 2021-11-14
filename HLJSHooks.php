@@ -78,7 +78,8 @@ class HLJSHooks
 
     public static function addAdditionalLanguage(Parser $parser, $lang = '')
     {
-        $parser->getOutput()->addHeadItem('<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/'.$lang.'.min.js"></script>');
+        global $wgHljsAdditionalLanguageScriptURL;
+        $parser->getOutput()->addHeadItem('<script defer src="'.str_replace('*', $lang, $wgHljsAdditionalLanguageScriptURL).'"></script>');
 
         return '';
     }
