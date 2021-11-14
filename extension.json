@@ -31,6 +31,9 @@
     "MessagesDirs": {
         "HLJS": ["i18n"]
     },
+    "ExtensionMessagesFiles": {
+        "ExampleExtensionMagic": "HLJS.i18n.php"
+    },
     "config": {
         "HljsScriptURL": {
             "value": "https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"

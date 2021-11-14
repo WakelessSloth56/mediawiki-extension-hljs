@@ -21,6 +21,7 @@ class HLJSHooks
             $parser->setHook('source', __CLASS__.'::render');
         }
         $parser->setHook('hljs', __CLASS__.'::render');
+        $parser->setFunctionHook('hljs-additional-language', __CLASS__.'::addAdditionalLanguage');
     }
 
     public static function onParserBeforeInternalParse(Parser $parser, &$text, $strip_state)
@@ -73,6 +74,13 @@ class HLJSHooks
         }
 
         return $output;
+    }
+
+    public static function addAdditionalLanguage(Parser $parser, $lang = '')
+    {
+        $parser->getOutput()->addHeadItem('<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/'.$lang.'.min.js"></script>');
+
+        return '';
     }
 
     private static function enableForScribunto($title)
