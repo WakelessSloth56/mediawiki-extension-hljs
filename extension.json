@@ -32,7 +32,7 @@
         "HLJS": ["i18n"]
     },
     "ExtensionMessagesFiles": {
-        "ExampleExtensionMagic": "HLJS.i18n.php"
+        "HLJSMagic": "HLJS.i18n.php"
     },
     "config": {
         "HljsScript": {
