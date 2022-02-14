@@ -1,6 +1,6 @@
 (async () => {
     'use strict';
-    const highlightPre = async () => {
+    async function highlightPre() {
         if (
             mw.config.get('wgHljsEnableForScribunto') &&
             mw.config.get('wgPageContentModel') === 'Scribunto'
@@ -93,11 +93,15 @@
                 pre.removeAttr('data-linestart');
             }
         });
-    };
+    }
 
-    const highlightCode = async () => {
+    async function highlightCode() {
         $('code.hljs').each((i, e) => hljs.highlightElement(e));
-    };
+    }
 
-    Promise.all([highlightPre(), highlightCode()]);
+    const defer = (callback) => {
+        if (typeof hljs == 'undefined') setTimeout(() => defer(callback), 20);
+        else callback();
+    };
+    defer(() => Promise.all([highlightPre(), highlightCode()]));
 })();
