@@ -1,8 +1,14 @@
 (async () => {
     'use strict';
     const highlightPre = async () => {
-        if (mw.config.get('wgHljsEnableForScribunto') && mw.config.get('wgPageContentModel') === 'Scribunto') {
-            $('.mw-parser-output>pre.mw-code.mw-script:last').addClass(['hljs', 'line']);
+        if (
+            mw.config.get('wgHljsEnableForScribunto') &&
+            mw.config.get('wgPageContentModel') === 'Scribunto'
+        ) {
+            $('.mw-parser-output>pre.mw-code.mw-script:last').addClass([
+                'hljs',
+                'line',
+            ]);
         }
         $('pre.hljs').each(function (i, v) {
             const pre = $(v);
@@ -40,7 +46,12 @@
                             const e = $(this);
                             if (e.hasClass('clicked')) return;
                             e.addClass('clicked');
-                            navigator.clipboard.writeText($('#hljsw-copysource-' + e.attr('data-copysource')).text());
+                            navigator.clipboard.writeText(
+                                $(
+                                    '#hljsw-copysource-' +
+                                        e.attr('data-copysource')
+                                ).text()
+                            );
                             e.children('i:nth-child(1)').toggle();
                             e.children('i:nth-child(2)').toggle();
                             setTimeout(() => {
@@ -53,7 +64,11 @@
             }
             if (pre.attr('data-title')) {
                 header.show();
-                header.prepend($('<div>').addClass('hljsw-title').html(pre.attr('data-title')));
+                header.prepend(
+                    $('<div>')
+                        .addClass('hljsw-title')
+                        .html(pre.attr('data-title'))
+                );
                 pre.removeAttr('data-title');
             }
             hljs.highlightElement(pre.get(0));
@@ -61,8 +76,14 @@
                 const line = $('<pre>').addClass('hljsw-linenumber');
                 content.prepend(line);
                 const rawLineStart = parseInt(pre.attr('data-linestart'));
-                const lineStart = !isNaN(rawLineStart) && rawLineStart > 0 ? rawLineStart : 1;
-                for (let i = lineStart, l = pre.text().split('\n').length + lineStart; i < l; i++) {
+                const lineStart =
+                    !isNaN(rawLineStart) && rawLineStart > 0 ? rawLineStart : 1;
+                for (
+                    let i = lineStart,
+                        l = pre.text().split('\n').length + lineStart;
+                    i < l;
+                    i++
+                ) {
                     line.append(
                         $('<div>')
                             .addClass('line-' + i)
