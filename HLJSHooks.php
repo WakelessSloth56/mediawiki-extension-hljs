@@ -5,9 +5,18 @@ class HLJSHooks
     public static function onBeforePageDisplay(OutputPage $out, Skin $skin)
     {
         if (in_array('ext.HLJS', $out->getModules())) {
-            global $wgHljsScript,$wgHljsStyle;
+            global $wgHljsScript, $wgHljsStyle;
             $out->addScriptFile($wgHljsScript);
             $out->addStyle($wgHljsStyle);
+
+            $jsConfigVars = $out->getJsConfigVars();
+            if (isset($jsConfigVars['hljsAdditionalLanguages'])) {
+                global $wgHljsAdditionalLanguageScript;
+                $languages = $jsConfigVars['hljsAdditionalLanguages'];
+                foreach ($languages as $name) {
+                    $out->addScriptFile(str_replace('*', $name, $wgHljsAdditionalLanguageScript));
+                }
+            }
         }
 
         return true;
@@ -27,7 +36,7 @@ class HLJSHooks
     public static function onParserBeforeInternalParse(Parser $parser, &$text, $strip_state)
     {
         if (HLJSHooks::enableForScribunto($parser->getTitle()) && !in_array('ext.HLJS', $parser->getOutput()->getModules())) {
-            global $wgOut,$wgHljsEnableForScribunto;
+            global $wgOut, $wgHljsEnableForScribunto;
             $wgOut->addJsConfigVars('wgHljsEnableForScribunto', $wgHljsEnableForScribunto);
             $parser->getOutput()->addModules('ext.HLJS');
         }
@@ -78,8 +87,16 @@ class HLJSHooks
 
     public static function addAdditionalLanguage(Parser $parser, $lang = '')
     {
-        global $wgHljsAdditionalLanguageScript;
-        $parser->getOutput()->addHeadItem('<script defer src="'.str_replace('*', $lang, $wgHljsAdditionalLanguageScript).'"></script>');
+        $output = $parser->getOutput();
+
+        $output->addModules('ext.HLJS');
+
+        if (!isset($output->mJsConfigVars['hljsAdditionalLanguages'])) {
+            $output->mJsConfigVars['hljsAdditionalLanguages'] = [];
+        }
+        if (!in_array($lang, $output->mJsConfigVars['hljsAdditionalLanguages'])) {
+            array_push($output->mJsConfigVars['hljsAdditionalLanguages'], $lang);
+        }
 
         return '';
     }
