@@ -8,15 +8,6 @@ class HLJSHooks
             global $wgHljsScript, $wgHljsStyle;
             $out->addScriptFile($wgHljsScript);
             $out->addStyle($wgHljsStyle);
-
-            $jsConfigVars = $out->getJsConfigVars();
-            if (isset($jsConfigVars['hljsAdditionalLanguages'])) {
-                global $wgHljsAdditionalLanguageScript;
-                $languages = $jsConfigVars['hljsAdditionalLanguages'];
-                foreach ($languages as $name) {
-                    $out->addScriptFile(str_replace('*', $name, $wgHljsAdditionalLanguageScript));
-                }
-            }
         }
 
         return true;
@@ -91,12 +82,13 @@ class HLJSHooks
 
         $output->addModules('ext.HLJS');
 
+        global $wgHljsAdditionalLanguageScript;
+        $output->addJsConfigVars('hljsAdditionalLanguageScript', $wgHljsAdditionalLanguageScript);
+
         if (!isset($output->mJsConfigVars['hljsAdditionalLanguages'])) {
             $output->mJsConfigVars['hljsAdditionalLanguages'] = [];
         }
-        if (!in_array($lang, $output->mJsConfigVars['hljsAdditionalLanguages'])) {
-            array_push($output->mJsConfigVars['hljsAdditionalLanguages'], $lang);
-        }
+        array_push($output->mJsConfigVars['hljsAdditionalLanguages'], $lang);
 
         return '';
     }

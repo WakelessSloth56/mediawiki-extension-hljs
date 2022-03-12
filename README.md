@@ -20,6 +20,7 @@ HLJS Integration 扩展使用 [highlight.js](https://highlightjs.org/) 库来进
 相较于原 Highlightjs Integration 扩展：
 
 * 支持使用在公共 CDN 托管的 HLJS 脚本和样式表。
+* 支持加载附加语言支持。
 * 支持为代码块启用复制按钮。
 * 支持为代码块添加标题。
 * 支持为代码块启用行号显示。
