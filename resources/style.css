@@ -46,6 +46,7 @@
 .hljsw-content pre.hljsw-linenumber {
     padding: 1em 0.4em 1em 1em;
     text-align: right;
+    direction: rtl;
     color: #656e77;
     background: #eeeeee;
     user-select: none;
