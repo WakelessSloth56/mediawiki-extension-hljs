@@ -59,7 +59,7 @@ pre.loading {
 pre.loading::before {
     content: 'Loading code...';
     position: absolute;
-    color: initial;
+    color: #888;
 }
 code.hljs.inline {
     display: inline;
