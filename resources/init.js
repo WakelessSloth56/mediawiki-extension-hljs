@@ -25,6 +25,7 @@ async function highlightPre() {
         $('.mw-parser-output>pre.mw-code.mw-script:last').addClass([
             'hljs',
             'line',
+            'language-lua',
         ]);
     }
 
@@ -38,6 +39,10 @@ async function highlightPre() {
         wrapper.append(header);
         wrapper.append(content);
         pre.appendTo(content);
+        if (pre.attr('data-style')) {
+            pre.attr('style', pre.attr('style') + pre.attr('data-style'));
+            pre.removeAttr('data-style');
+        }
         if (pre.attr('data-wrapper-style')) {
             wrapper.attr('style', pre.attr('data-wrapper-style'));
             pre.removeAttr('data-wrapper-style');
@@ -86,6 +91,8 @@ async function highlightPre() {
             );
             pre.removeAttr('data-title');
         }
+        pre.css('color', '');
+        pre.removeClass('loading');
         hljs.highlightElement(pre.get(0));
         if (pre.hasClass('line')) {
             const line = $('<pre>').addClass('hljsw-linenumber');
@@ -116,7 +123,7 @@ async function highlightCode() {
 
 (async () => {
     const defer = (callback) => {
-        if (typeof hljs == 'undefined') setTimeout(() => defer(callback), 20);
+        if (typeof hljs == 'undefined') setTimeout(() => defer(callback), 250);
         else callback();
     };
     defer(async () => {

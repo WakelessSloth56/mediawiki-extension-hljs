@@ -50,6 +50,16 @@
     background: #eeeeee;
     user-select: none;
 }
+pre.loading {
+    position: relative;
+    user-select: none;
+    color: #0000;
+}
+pre.loading::before {
+    content: 'Loading code...';
+    position: absolute;
+    color: initial;
+}
 code.hljs.inline {
     display: inline;
 }

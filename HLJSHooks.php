@@ -41,36 +41,43 @@ class HLJSHooks
 
         $lang = isset($args['lang']) ? ' language-'.$args['lang'] : '';
 
-        $htmlAttribs = [];
+        $attr = [];
 
-        $htmlAttribs['class'] = 'hljs'.$lang;
-
-        if (isset($args['style'])) {
-            $htmlAttribs['style'] = $args['style'];
-        }
+        $attr['class'] = 'hljs'.$lang;
 
         if (isset($args['inline'])) {
-            $htmlAttribs['class'] .= ' inline';
-            $output = Html::rawElement('code', $htmlAttribs, $code);
+            $attr['class'] .= ' inline';
+            if (isset($args['style'])) {
+                $attr['style'] = $args['style'];
+            }
+            $output = Html::rawElement('code', $attr, $code);
         } else {
             if (isset($args['copy'])) {
-                $htmlAttribs['class'] .= ' copy';
+                $attr['class'] .= ' copy';
             }
             if (isset($args['title'])) {
-                $htmlAttribs['data-title'] = $args['title'];
+                $attr['data-title'] = $args['title'];
             }
             if (isset($args['line'])) {
-                $htmlAttribs['class'] .= ' line';
+                $attr['class'] .= ' line';
             }
             if (isset($args['linestart'])) {
-                $htmlAttribs['data-linestart'] = $args['linestart'];
+                $attr['data-linestart'] = $args['linestart'];
+            }
+            if (isset($args['style'])) {
+                $attr['data-style'] = $args['style'];
             }
             if (isset($args['wrapper-style'])) {
-                $htmlAttribs['data-wrapper-style'] = $args['wrapper-style'];
+                $attr['data-wrapper-style'] = $args['wrapper-style'];
             }
+
+            $attr['style'] = 'color:#0000;';
+            $attr['class'] .= ' loading';
+
             $marker = $parser::MARKER_PREFIX . '-hljsinner-'. sprintf('%08X', $parser->mMarkerIndex++) . $parser::MARKER_SUFFIX;
             $parser->getStripState()->addNoWiki($marker, $code);
-            $output = Html::rawElement('pre', $htmlAttribs, $marker);
+
+            $output = Html::rawElement('pre', $attr, $marker);
         }
 
         return $output;
