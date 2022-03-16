@@ -123,6 +123,19 @@ async function highlightPre() {
                             .html(l)
                     )
             );
+            if (pre.attr('data-markline')) {
+                const marks = pre.attr('data-markline');
+                if (/^(\d+,)+\d+$/.test(marks)) {
+                    marks.split(',').forEach((l) => {
+                        content.find('.line-' + l).addClass('marked');
+                    });
+                } else if (/^\d+-\d+$/.test(marks)) {
+                    const _ = marks.split('-').map((l) => parseInt(l));
+                    for (let i = _[0], end = _[1] + 1; i < end; i++) {
+                        content.find('.line-' + i).addClass('marked');
+                    }
+                }
+            }
         }
     });
 }

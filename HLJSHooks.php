@@ -64,6 +64,9 @@ class HLJSHooks
             if (isset($args['linestart'])) {
                 $attr['data-linestart'] = $args['linestart'];
             }
+            if (isset($args['markline'])) {
+                $attr['data-markline'] = $args['markline'];
+            }
             if (isset($args['style'])) {
                 $attr['data-style'] = $args['style'];
             }

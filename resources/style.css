@@ -44,7 +44,7 @@
     white-space: pre;
 }
 .hljsw-content pre.hljsw-linenumber {
-    padding: 1em 0em 1em 1em;
+    padding: 1em 0em;
     text-align: right;
     direction: rtl;
     color: #656e77;
@@ -52,13 +52,20 @@
     user-select: none;
 }
 .hljsw-content pre.hljsw-linenumber > div.linenumber {
+    padding-left: 1em;
     padding-right: 0.4em;
+}
+.hljsw-content pre.hljsw-linenumber > div.linenumber.marked {
+    background-color: #ffffcc;
 }
 .hljsw-content pre.hljs.line {
     padding-left: 0;
 }
 .hljsw-content pre.hljs.line > div.line {
     padding-left: 1em;
+}
+.hljsw-content pre.hljs.line > div.line.marked {
+    background-color: #ffffcc;
 }
 pre.loading {
     position: relative;
