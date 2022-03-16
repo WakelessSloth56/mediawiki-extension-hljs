@@ -44,12 +44,21 @@
     white-space: pre;
 }
 .hljsw-content pre.hljsw-linenumber {
-    padding: 1em 0.4em 1em 1em;
+    padding: 1em 0em 1em 1em;
     text-align: right;
     direction: rtl;
     color: #656e77;
     background: #eeeeee;
     user-select: none;
+}
+.hljsw-content pre.hljsw-linenumber > div.linenumber {
+    padding-right: 0.4em;
+}
+.hljsw-content pre.hljs.line {
+    padding-left: 0;
+}
+.hljsw-content pre.hljs.line > div.line {
+    padding-left: 1em;
 }
 pre.loading {
     position: relative;

@@ -108,11 +108,21 @@ async function highlightPre() {
             ) {
                 line.append(
                     $('<div>')
-                        .addClass('line-' + i)
+                        .addClass('linenumber line-' + i)
                         .text(i)
                 );
             }
             pre.removeAttr('data-linestart');
+            pre.html(
+                pre
+                    .html()
+                    .split('\n')
+                    .map((l, i) =>
+                        $('<div>')
+                            .addClass(`line line-${lineStart + i}`)
+                            .html(l)
+                    )
+            );
         }
     });
 }
