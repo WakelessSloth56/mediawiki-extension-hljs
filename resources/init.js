@@ -29,9 +29,10 @@ async function highlightPre() {
         ]);
     }
 
-    $('pre.hljs').each(function (i, v) {
+    $('pre.hljsw-pre').each(function (i, v) {
         const pre = $(v);
         pre.html(pre.html().replace(/^\n+/, '').trimEnd());
+
         const wrapper = $('<div>').addClass('hljsw-wrapper');
         const header = $('<div>').addClass('hljsw-header').hide();
         const content = $('<div>').addClass('hljsw-content');
@@ -39,30 +40,33 @@ async function highlightPre() {
         wrapper.append(header);
         wrapper.append(content);
         pre.appendTo(content);
-        if (pre.attr('data-style')) {
-            pre.attr('style', pre.attr('style') + pre.attr('data-style'));
+
+        if (pre.data('style')) {
+            pre.attr('style', pre.attr('style') + pre.data('style'));
             pre.removeAttr('data-style');
         }
-        if (pre.attr('data-wrapper-style')) {
-            wrapper.attr('style', pre.attr('data-wrapper-style'));
+
+        if (pre.data('wrapper-style')) {
+            wrapper.attr('style', pre.data('wrapper-style'));
             pre.removeAttr('data-wrapper-style');
         }
-        if (pre.hasClass('copy')) {
+
+        if (pre.hasClass('copyable')) {
             header.show();
-            const id = Math.random().toString(36).slice(-6);
+            const copySourceId = Math.random().toString(36).slice(-6);
             pre.after(
                 $('<pre>')
-                    .attr('id', 'hljsw-copysource-' + id)
+                    .attr('id', 'hljsw-copysource-' + copySourceId)
                     .html(pre.html())
                     .hide()
             );
             header.append(
                 $('<div>')
-                    .attr('data-copysource', id)
+                    .attr('data-copysource', copySourceId)
                     .addClass('hljsw-copybutton')
                     .append(
                         '<i class="far fa-copy fa-fw"></i> ' +
-                            '<i class="fas fa-check fa-fw hljsw-copied-icon" style="display:none"></i> ' +
+                            '<i class="fas fa-check fa-fw copied-icon"></i> ' +
                             mw.message('hljs-copy').text()
                     )
                     .on('click', function () {
@@ -84,64 +88,69 @@ async function highlightPre() {
                     })
             );
         }
-        if (pre.attr('data-title')) {
+
+        if (pre.data('title')) {
             header.show();
             header.prepend(
-                $('<div>').addClass('hljsw-title').html(pre.attr('data-title'))
+                $('<div>').addClass('hljsw-title').html(pre.data('title'))
             );
             pre.removeAttr('data-title');
         }
+
         pre.css('color', '');
         pre.removeClass('loading');
         hljs.highlightElement(pre.get(0));
-        if (pre.hasClass('line')) {
-            const line = $('<pre>').addClass('hljsw-linenumber');
-            content.prepend(line);
-            const rawLineStart = parseInt(pre.attr('data-linestart'));
+
+        if (pre.hasClass('lines')) {
+            const rawLineStart = parseInt(pre.data('linestart'));
             const lineStart =
                 !isNaN(rawLineStart) && rawLineStart > 0 ? rawLineStart : 1;
+            pre.removeAttr('data-linestart');
+
+            const linenos = $('<pre>').addClass('hljsw-linenumber');
+            content.prepend(linenos);
             for (
                 let i = lineStart,
-                    l = pre.text().split('\n').length + lineStart;
-                i < l;
+                    lineCount = pre.text().split('\n').length + lineStart;
+                i < lineCount;
                 i++
             ) {
-                line.append(
-                    $('<div>')
-                        .addClass('linenumber line-' + i)
-                        .text(i)
-                );
+                linenos.append($('<div>').addClass(`lineno l-${i}`).text(i));
             }
-            pre.removeAttr('data-linestart');
+
             pre.html(
                 pre
                     .html()
                     .split('\n')
-                    .map((l, i) =>
+                    .map((line, i) =>
                         $('<div>')
-                            .addClass(`line line-${lineStart + i}`)
-                            .html(l)
+                            .addClass(`line l-${lineStart + i}`)
+                            .html(line)
                     )
             );
-            if (pre.attr('data-markline')) {
-                const marks = pre.attr('data-markline');
-                if (/^(\d+,)+\d+$/.test(marks)) {
-                    marks.split(',').forEach((l) => {
-                        content.find('.line-' + l).addClass('marked');
+
+            if (pre.data('markline')) {
+                /** @type string */ const mark = pre.data('markline');
+                if (Number(mark)) {
+                    content.find(`.l-${mark}`).addClass('marked');
+                } else if (/^(\d+,)+\d+$/.test(mark)) {
+                    mark.split(',').forEach((n) => {
+                        content.find(`.l-${n}`).addClass('marked');
                     });
-                } else if (/^\d+-\d+$/.test(marks)) {
-                    const _ = marks.split('-').map((l) => parseInt(l));
-                    for (let i = _[0], end = _[1] + 1; i < end; i++) {
-                        content.find('.line-' + i).addClass('marked');
+                } else if (/^\d+-\d+$/.test(mark)) {
+                    const _p = mark.split('-').map((l) => parseInt(l));
+                    for (let n = _p[0], end = _p[1] + 1; n < end; n++) {
+                        content.find(`.l-${n}`).addClass('marked');
                     }
                 }
+                pre.removeAttr('data-markline');
             }
         }
     });
 }
 
 async function highlightCode() {
-    $('code.hljs').each((i, e) => hljs.highlightElement(e));
+    $('code.hljsw-code').each((i, e) => hljs.highlightElement(e));
 }
 
 (async () => {
@@ -149,6 +158,7 @@ async function highlightCode() {
         if (typeof hljs == 'undefined') setTimeout(() => defer(callback), 250);
         else callback();
     };
+
     defer(async () => {
         await loadAdditionalHljsScript();
         Promise.all([highlightPre(), highlightCode()]);

@@ -46,20 +46,21 @@ class HLJSHooks
         $attr['class'] = 'hljs'.$lang;
 
         if (isset($args['inline'])) {
-            $attr['class'] .= ' inline';
+            $attr['class'] .= ' hljsw-code inline';
             if (isset($args['style'])) {
                 $attr['style'] = $args['style'];
             }
             $output = Html::rawElement('code', $attr, $code);
         } else {
-            if (isset($args['copy'])) {
-                $attr['class'] .= ' copy';
+            $attr['class'] .= ' hljsw-pre';
+            if (isset($args['copyable'])) {
+                $attr['class'] .= ' copyable';
             }
             if (isset($args['title'])) {
                 $attr['data-title'] = $args['title'];
             }
-            if (isset($args['line'])) {
-                $attr['class'] .= ' line';
+            if (isset($args['lines'])) {
+                $attr['class'] .= ' lines';
             }
             if (isset($args['linestart'])) {
                 $attr['data-linestart'] = $args['linestart'];
