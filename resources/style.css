@@ -51,12 +51,10 @@
 }
 
 .hljsw-pre.lines {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 1em 0;
 }
 .hljsw-pre > .line {
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 0 1em;
 }
 .hljsw-pre > .line.marked {
     background-color: #ffffcc;
@@ -80,6 +78,7 @@
 
 .hljsw-pre.loading {
     position: relative;
+    padding: 1em;
     user-select: none;
     color: #0000;
 }
