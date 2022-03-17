@@ -63,6 +63,7 @@
 }
 
 .hljsw-linenumber {
+    flex: none;
     padding: 1em 0;
     text-align: right;
     direction: rtl;
@@ -71,8 +72,7 @@
     user-select: none;
 }
 .hljsw-linenumber > .lineno {
-    padding-left: 1em;
-    padding-right: 0.4em;
+    padding: 0 0.4em 0 1em;
 }
 .hljsw-linenumber > .lineno.marked {
     background-color: #ffffcc;
