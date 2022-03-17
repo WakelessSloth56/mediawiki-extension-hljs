@@ -125,7 +125,7 @@ async function highlightPre() {
                     .map((line, i) =>
                         $('<div>')
                             .addClass(`line l-${lineStart + i}`)
-                            .html(line)
+                            .html(`${line}\n`)
                     )
             );
 
