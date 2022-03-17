@@ -23,8 +23,8 @@ async function highlightPre() {
         mw.config.get('wgPageContentModel') === 'Scribunto'
     ) {
         $('.mw-parser-output>pre.mw-code.mw-script:last').addClass([
-            'hljs',
-            'line',
+            'hljsw-pre',
+            'lines',
             'language-lua',
         ]);
     }
