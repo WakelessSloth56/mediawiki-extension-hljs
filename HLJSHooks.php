@@ -96,10 +96,15 @@ class HLJSHooks
         global $wgHljsAdditionalLanguageScript;
         $output->addJsConfigVars('hljsAdditionalLanguageScript', $wgHljsAdditionalLanguageScript);
 
-        if (!isset($output->mJsConfigVars['hljsAdditionalLanguages'])) {
-            $output->mJsConfigVars['hljsAdditionalLanguages'] = [];
+        $reflection_output = new ReflectionObject($output);
+        $reflection_mJsConfigVars = $reflection_output->getProperty('mJsConfigVars');
+        $reflection_mJsConfigVars->setAccessible(true);
+        $mJsConfigVars = $reflection_mJsConfigVars->getValue($output);
+        if (!isset($mJsConfigVars['hljsAdditionalLanguages'])) {
+            $mJsConfigVars['hljsAdditionalLanguages'] = [];
         }
-        array_push($output->mJsConfigVars['hljsAdditionalLanguages'], $lang);
+        array_push($mJsConfigVars['hljsAdditionalLanguages'], $lang);
+        $reflection_mJsConfigVars->setValue($output, $mJsConfigVars);
 
         return '';
     }
