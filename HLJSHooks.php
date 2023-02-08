@@ -27,8 +27,8 @@ class HLJSHooks
     public static function onParserBeforeInternalParse(Parser $parser, &$text, $strip_state)
     {
         if (HLJSHooks::enableForScribunto($parser->getTitle()) && !in_array('ext.HLJS', $parser->getOutput()->getModules())) {
-            global $wgOut, $wgHljsEnableForScribunto;
-            $wgOut->addJsConfigVars('wgHljsEnableForScribunto', $wgHljsEnableForScribunto);
+            global $wgHljsEnableForScribunto;
+            $parser->getOutput()->addJsConfigVars('wgHljsEnableForScribunto', $wgHljsEnableForScribunto);
             $parser->getOutput()->addModules('ext.HLJS');
         }
     }
@@ -113,6 +113,6 @@ class HLJSHooks
     {
         global $wgHljsEnableForScribunto;
 
-        return $wgHljsEnableForScribunto && $title !== null && class_exists(Scribunto::class) && $title->getNamespace() === NS_MODULE;
+        return $wgHljsEnableForScribunto && $title !== null && class_exists('MediaWiki\Extension\Scribunto\Scribunto', false) && $title->getNamespace() === NS_MODULE;
     }
 }
