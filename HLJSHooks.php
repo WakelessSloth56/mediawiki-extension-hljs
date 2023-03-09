@@ -56,8 +56,14 @@ class HLJSHooks
             if (isset($args['copyable'])) {
                 $attr['class'] .= ' copyable';
             }
+            if (isset($args['langname'])) {
+                $attr['class'] .= ' langname';
+            }
             if (isset($args['title'])) {
                 $attr['data-title'] = $args['title'];
+            }
+            if (isset($args['source'])) {
+                $attr['data-source'] = $args['source'];
             }
             if (isset($args['lines'])) {
                 $attr['class'] .= ' lines';

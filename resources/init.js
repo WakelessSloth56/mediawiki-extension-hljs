@@ -35,10 +35,12 @@ async function highlightPre() {
 
         const wrapper = $('<div>').addClass('hljsw-wrapper');
         const header = $('<div>').addClass('hljsw-header').hide();
+        const footer = $('<div>').addClass('hljsw-footer').hide();
         const content = $('<div>').addClass('hljsw-content');
         pre.before(wrapper);
         wrapper.append(header);
         wrapper.append(content);
+        wrapper.append(footer);
         pre.appendTo(content);
 
         if (pre.data('style')) {
@@ -95,6 +97,36 @@ async function highlightPre() {
                 $('<div>').addClass('hljsw-title').html(pre.data('title'))
             );
             pre.removeAttr('data-title');
+        }
+
+        if (pre.hasClass('langname')) {
+            const langName = pre
+                .attr('class')
+                .split(/\s+/)
+                .filter((c) => c.startsWith('language-'))
+                .map((c) => c.replace('language-', ''))[0];
+            if (langName !== undefined) {
+                footer.show();
+                footer.append(
+                    $('<div>')
+                        .addClass('hljsw-langname')
+                        .html(hljs.getLanguage(langName).name)
+                );
+            }
+        }
+
+        if (pre.data('source')) {
+            footer.show();
+            footer.append(
+                $('<div>')
+                    .addClass('hljsw-sourcelink')
+                    .append(
+                        $('<a>')
+                            .attr('href', pre.data('source'))
+                            .text(pre.data('source'))
+                    )
+            );
+            footer.removeAttr('data-source');
         }
 
         pre.css('color', '');

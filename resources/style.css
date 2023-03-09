@@ -35,6 +35,26 @@
     color: #3c763d;
 }
 
+.hljsw-footer {
+    display: flex;
+    font-size: 0.5em;
+    background-color: #f2f2f2;
+    color: #171717;
+    border-top: 0.1em solid #c8ccd1;
+}
+
+.hljsw-langname {
+    padding: 1px 10px;
+    border-right: 0.1em solid #c8ccd1;
+}
+
+.hljsw-sourcelink {
+    padding: 1px 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .hljsw-content {
     display: flex;
     flex-direction: row;
